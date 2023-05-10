@@ -25,4 +25,4 @@ jobs:
     - name: Update Epic PR description
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: python print "hello"
+      run: python .github/scripts/update-epic-pr.py
