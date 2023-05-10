@@ -8,7 +8,7 @@ on:
 jobs:
   update_epic_pr_description:
     runs-on: ubuntu-latest
-    if: startsWith(github.event.pull_request_target.base.ref, 'epic')
+    if: contains(github.event.pull_request.labels.*.name, 'epic')
 
     steps:
     - name: Checkout repository
