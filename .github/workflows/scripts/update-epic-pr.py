@@ -1,12 +1,19 @@
 import os
 from github import Github
+import json
 
 # Get required information from environment variables
 token = os.environ['GITHUB_TOKEN']
 repo_name = os.environ['GITHUB_REPOSITORY']
-pr_number = os.environ['GITHUB_EVENT_PULL_REQUEST_NUMBER']
-epic_branch_name = os.environ['GITHUB_EVENT_PULL_REQUEST_BASE_REF']
-pr_title = os.environ['GITHUB_EVENT_PULL_REQUEST_TITLE']
+github_event_path = os.environ['GITHUB_EVENT_PATH']
+
+# Load GitHub event data
+with open(github_event_path, 'r') as f:
+    github_event_data = json.load(f)
+
+pr_number = github_event_data['pull_request']['number']
+epic_branch_name = github_event_data['pull_request']['base']['ref']
+pr_title = github_event_data['pull_request']['title']
 
 
 # Authenticate with GitHub API
